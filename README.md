@@ -1,4 +1,4 @@
-# US International Windows-like for Linux
+# US International Windows-like Keyboard Layout for Linux
 
 Get the same smart dead key behavior on Linux as Windows US-International keyboard layout.
 

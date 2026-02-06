@@ -1,4 +1,4 @@
-# US International Windows-gedrag voor Linux
+# US International Windows-achtige Toetsenbordindeling voor Linux
 
 Krijg hetzelfde slimme dead key gedrag op Linux als de Windows US-International toetsenbordindeling.
 
