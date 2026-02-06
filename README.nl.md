@@ -22,7 +22,21 @@ Dit `.XCompose` bestand brengt Windows-achtig gedrag naar Linux:
 
 Deze oplossing gebruikt het `.XCompose`-systeem van X11. Op **Wayland** wordt `.XCompose` niet door alle applicaties ondersteund. Het werkt in de meeste GTK- en Qt-apps, maar **niet in Chromium-gebaseerde browsers** (Chrome, Edge, Brave, Electron-apps) die als native Wayland-client draaien.
 
-**Workaround voor Chromium-gebaseerde browsers op Wayland:** Je kunt deze browsers forceren om via XWayland te draaien door `--ozone-platform=x11` toe te voegen aan het startcommando. Om dit permanent te maken, bewerk het `.desktop`-bestand van je browser (meestal in `~/.local/share/applications/` of `/usr/share/applications/`) en voeg de flag toe aan de `Exec=` regel. Dit herstelt volledige `.XCompose`-ondersteuning.
+**Workaround voor Chromium-gebaseerde browsers op Wayland:** Forceer de browser om via XWayland te draaien door `--ozone-platform=x11` toe te voegen aan het startcommando. Om dit permanent te maken:
+
+- **Normale installatie:** Bewerk het `.desktop`-bestand van je browser (meestal in `~/.local/share/applications/` of `/usr/share/applications/`) en voeg `--ozone-platform=x11` toe aan de `Exec=` regel, bijv.:
+  ```
+  Exec=/usr/bin/brave --ozone-platform=x11 %U
+  ```
+- **Flatpak-installatie:** Voeg de flag toe aan het configuratiebestand van de browser en geef toegang tot `.XCompose`:
+  ```bash
+  # Voor Brave (pas de app ID aan voor andere browsers):
+  echo "--ozone-platform=x11" >> ~/.var/app/com.brave.Browser/config/brave-flags.conf
+  flatpak override --user --filesystem=~/.XCompose:ro com.brave.Browser
+  ```
+  Veelgebruikte Flatpak app IDs: `com.brave.Browser`, `com.google.Chrome`, `com.microsoft.Edge`
+
+Herstart de browser na deze wijzigingen.
 
 Als alternatief kun je de ingebouwde `US alt. intl.` layout gebruiken, die dead keys naar AltGr verplaatst (maar niet het Windows-achtige gedrag heeft).
 
