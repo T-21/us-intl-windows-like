@@ -15,17 +15,17 @@ echo ""
 
 # Check if .XCompose already exists
 if [ -f "$COMPOSE_FILE" ]; then
-    echo "⚠️  Existing .XCompose file found!"
+    echo "Existing .XCompose file found!"
     echo "Creating backup at: $BACKUP_FILE"
     cp "$COMPOSE_FILE" "$BACKUP_FILE"
 fi
 
 # Copy our .XCompose file
-echo "📋 Installing .XCompose file..."
-cp .XCompose "$COMPOSE_FILE"
+echo "Installing .XCompose file..."
+cp "$(dirname "$0")/.XCompose" "$COMPOSE_FILE"
 
 echo ""
-echo "✅ Installation complete!"
+echo "Installation complete!"
 echo ""
 echo "Next steps:"
 echo "1. Set your keyboard layout to 'US alt. intl.' or 'US international with dead keys'"

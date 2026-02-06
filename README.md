@@ -18,6 +18,10 @@ This `.XCompose` file brings Windows-like behavior to Linux:
 - Works on all Linux distros
 - Works with any desktop environment (KDE, GNOME, XFCE, etc.)
 
+## Limitations
+
+This solution uses X11's `.XCompose` system. On **Wayland**, `.XCompose` is not supported by all applications. It works in most GTK and Qt apps, but **not in Chromium-based browsers** (Chrome, Edge, Brave, Electron apps) running as native Wayland clients. If you use Wayland and need full browser support, consider using the built-in `US alt. intl.` layout, which moves dead keys to AltGr (but does not have the Windows-like behavior).
+
 ## Installation
 
 ### Quick Install

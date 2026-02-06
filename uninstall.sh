@@ -13,19 +13,19 @@ echo "================================================"
 echo ""
 
 if [ ! -f "$COMPOSE_FILE" ]; then
-    echo "❌ No .XCompose file found. Nothing to uninstall."
+    echo "No .XCompose file found. Nothing to uninstall."
     exit 0
 fi
 
 # Check if backup exists
 if [ -f "$BACKUP_FILE" ]; then
-    echo "📋 Restoring backup..."
+    echo "Restoring backup..."
     mv "$BACKUP_FILE" "$COMPOSE_FILE"
-    echo "✅ Restored previous .XCompose file"
+    echo "Restored previous .XCompose file"
 else
-    echo "🗑️  Removing .XCompose file..."
+    echo "Removing .XCompose file..."
     rm "$COMPOSE_FILE"
-    echo "✅ Removed .XCompose file"
+    echo "Removed .XCompose file"
 fi
 
 echo ""
