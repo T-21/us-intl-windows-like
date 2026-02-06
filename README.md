@@ -22,7 +22,7 @@ This `.XCompose` file brings Windows-like behavior to Linux:
 
 This solution uses X11's `.XCompose` system. On **Wayland**, `.XCompose` is not supported by all applications. It works in most GTK and Qt apps, but **not in Chromium-based browsers** (Chrome, Edge, Brave, Electron apps) running as native Wayland clients.
 
-**Workaround for Chromium-based browsers on Wayland:** You can force these browsers to run under XWayland by launching them with `--ozone-platform=x11`. In Brave, you can also set this via `brave://flags` → "Preferred Ozone Platform" → X11. This restores full `.XCompose` support.
+**Workaround for Chromium-based browsers on Wayland:** You can force these browsers to run under XWayland by adding `--ozone-platform=x11` to the launch command. To make this permanent, edit the `.desktop` file for your browser (usually in `~/.local/share/applications/` or `/usr/share/applications/`) and append the flag to the `Exec=` line. This restores full `.XCompose` support.
 
 Alternatively, consider using the built-in `US alt. intl.` layout, which moves dead keys to AltGr (but does not have the Windows-like behavior).
 
