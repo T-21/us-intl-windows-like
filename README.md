@@ -8,15 +8,18 @@ On Linux, the US-International keyboard layouts have frustrating behavior:
 - `US intl. with dead keys`: Typing `I'm` requires hitting space after the apostrophe
 - `US alt. intl.`: Typing `I'm` gives `Iḿ` (accent on the m)
 
-Windows US-International is smarter: apostrophes only create accents on vowels (á, é, í, ó, ú), not consonants.
+Windows US-International is smarter: the apostrophe only combines with vowels (á, é, í, ó, ú, ý) and `c` (ç). With any other letter it produces a plain apostrophe followed by that letter.
 
 ## The Solution
 
 This `.XCompose` file brings Windows-like behavior to Linux:
-- `' + e` → `é` (accents on vowels work)
-- `I'm` → `I'm` (apostrophes with consonants work normally)
+- `' + e` → `é` (accents on vowels still work)
+- `I'm` → `I'm` (apostrophes before consonants work normally)
+- `' + c` → `ç` and `" + y` → `ÿ` (the exceptions Windows makes are preserved)
 - Works on all Linux distros
 - Works with any desktop environment (KDE, GNOME, XFCE, etc.)
+
+Every consonant is covered, including the ones where the X11 default table would otherwise produce an accented character (`ǵ ḱ ṕ ẃ ź`) or silently swallow the keystrokes (`b f h q x`).
 
 ## Limitations
 
@@ -49,9 +52,21 @@ chmod +x install.sh
 ./install.sh
 ```
 
+### Updating
+
+```bash
+cd us-intl-windows-like
+git pull
+./install.sh
+```
+
+Log out and log back in afterwards. Restarting individual applications is not always enough for the new table to be picked up.
+
+The `~/.XCompose` you had before the first install is backed up once and never overwritten afterwards, so updating is safe to repeat. If the installed file has been modified locally, a timestamped copy is saved next to it before it is replaced, so you can retrieve your own mappings from there.
+
 ### Manual Install
 
-1. Copy `.XCompose` to your home directory:
+1. Copy `.XCompose` to your home directory (back up any existing file first):
    ```bash
    cp .XCompose ~/.XCompose
    ```
@@ -85,6 +100,8 @@ chmod +x install.sh
 ./uninstall.sh
 ```
 
+This restores the `~/.XCompose` you had before installing, or removes the file if there was none. Timestamped copies of locally modified versions are left in place and listed, so nothing disappears silently.
+
 Or manually:
 ```bash
 rm ~/.XCompose
@@ -92,11 +109,15 @@ rm ~/.XCompose
 
 ## How It Works
 
-The `.XCompose` file overrides the default dead key behavior for consonants while preserving accent behavior for vowels. It uses X11's compose key system, which is supported across all Linux desktop environments.
+The first line, `include "%L"`, pulls in the default compose table for your locale, so every standard sequence keeps working. The rules below it override only the combinations where Linux and Windows disagree, which is a dead key followed by a consonant. A later definition wins, so those overrides replace the defaults while the vowels are left untouched.
+
+For most Latin-script locales (`en_US`, `nl_NL`, `de_DE`, `fr_FR` and others) `%L` resolves to the same table, so behavior does not depend on your system language. That is also why the line should stay as `%L` rather than being hardcoded to a specific locale.
 
 ## Contributing
 
 Issues and pull requests welcome! This was born from frustration with Linux keyboard layouts and shared on forums like [this Linux Mint thread](https://forums.linuxmint.com/viewtopic.php?t=427302).
+
+When changing mappings, check that vowels still accent correctly (`café`, `naïve`) and that common contractions stay plain (`don't`, `I'll`, `I'd've`). Duplicate sequences are resolved silently in favor of the last one, so it is easy to shadow an existing rule by accident.
 
 ## Credits
 
