@@ -1,5 +1,7 @@
 # US International Windows-achtige Toetsenbordindeling voor Linux
 
+*[English](README.md) | [Nederlands](README.nl.md)*
+
 Krijg hetzelfde slimme dead key gedrag op Linux als de Windows US-International toetsenbordindeling.
 
 ## Het Probleem
