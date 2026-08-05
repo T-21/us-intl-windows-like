@@ -1,5 +1,7 @@
 # US International Windows-like Keyboard Layout for Linux
 
+*[English](README.md) | [Nederlands](README.nl.md)*
+
 Get the same smart dead key behavior on Linux as Windows US-International keyboard layout.
 
 ## The Problem
