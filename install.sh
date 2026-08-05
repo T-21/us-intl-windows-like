@@ -13,16 +13,24 @@ echo "US International Windows-like Layout Installer"
 echo "================================================"
 echo ""
 
-# Check if .XCompose already exists
+REPO_FILE="$(dirname "$0")/.XCompose"
+
+# Preserve whatever was there before we touched it. The original is kept
+# once and never overwritten, so re-running this script is safe.
 if [ -f "$COMPOSE_FILE" ]; then
-    echo "Existing .XCompose file found!"
-    echo "Creating backup at: $BACKUP_FILE"
-    cp "$COMPOSE_FILE" "$BACKUP_FILE"
+    if [ ! -f "$BACKUP_FILE" ]; then
+        echo "Existing .XCompose found, backing it up to: $BACKUP_FILE"
+        cp "$COMPOSE_FILE" "$BACKUP_FILE"
+    elif ! cmp -s "$COMPOSE_FILE" "$REPO_FILE"; then
+        STAMP="$BACKUP_FILE.$(date +%Y%m%d-%H%M%S)"
+        echo "Your .XCompose differs from this version, saving a copy at: $STAMP"
+        cp "$COMPOSE_FILE" "$STAMP"
+    fi
 fi
 
 # Copy our .XCompose file
 echo "Installing .XCompose file..."
-cp "$(dirname "$0")/.XCompose" "$COMPOSE_FILE"
+cp "$REPO_FILE" "$COMPOSE_FILE"
 
 echo ""
 echo "Installation complete!"
