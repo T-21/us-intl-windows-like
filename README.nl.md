@@ -43,8 +43,6 @@ Deze oplossing gebruikt het `.XCompose`-systeem van X11. Op **Wayland** wordt `.
 
 Herstart de browser na deze wijzigingen.
 
-Als alternatief kun je de ingebouwde `US alt. intl.` layout gebruiken, die dead keys naar AltGr verplaatst (maar niet het Windows-achtige gedrag heeft).
-
 ## Installatie
 
 ### Snelle Installatie
