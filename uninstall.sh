@@ -28,6 +28,13 @@ else
     echo "Removed .XCompose file"
 fi
 
+# Timestamped copies are left alone; only mention them so nothing is lost silently.
+if ls "$BACKUP_FILE".* >/dev/null 2>&1; then
+    echo ""
+    echo "Additional saved copies were left in place:"
+    ls -1 "$BACKUP_FILE".*
+fi
+
 echo ""
 echo "Uninstallation complete!"
 echo "Log out and back in for changes to take effect."
