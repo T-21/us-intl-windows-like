@@ -120,12 +120,3 @@ For most Latin-script locales (`en_US`, `nl_NL`, `de_DE`, `fr_FR` and others) `%
 Issues and pull requests welcome! This was born from frustration with Linux keyboard layouts and shared on forums like [this Linux Mint thread](https://forums.linuxmint.com/viewtopic.php?t=427302).
 
 When changing mappings, check that vowels still accent correctly (`café`, `naïve`) and that common contractions stay plain (`don't`, `I'll`, `I'd've`). Duplicate sequences are resolved silently in favor of the last one, so it is easy to shadow an existing rule by accident.
-
-## Credits
-
-- Original solution from the Linux Mint forums
-- Refined and packaged by Toine Pel
-
-## License
-
-MIT License - See [LICENSE](LICENSE) file
